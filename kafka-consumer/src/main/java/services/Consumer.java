@@ -1,4 +1,4 @@
-package com.kafka;
+package services;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -6,7 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 @Service
-public class Producer {
+public class Consumer {
+	
+	@Value("${topic}")
+	String topic;
 
 	@Value("${spring.kafka.consumer.group.id}")
 	String groupId;
