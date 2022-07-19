@@ -1,12 +1,28 @@
 package com.kafka;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
+import java.util.stream.Stream;
+import java.io.File;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javax.annotation.PostConstruct;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -42,7 +58,7 @@ public class KafkaApplication {
 	public void schedule() {
 		System.out.println("Creating newScheduledThreadPool\nSchedule period "+schedulePeriod);
 		executor = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
-
+		
 		Runnable task = () -> producer.sendMessage(createMessage());
 		executor.scheduleAtFixedRate(task, 0, schedulePeriod, TimeUnit.MILLISECONDS);
 	}
