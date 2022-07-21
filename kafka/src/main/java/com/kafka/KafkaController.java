@@ -20,7 +20,7 @@ public class KafkaController {
      * Questo end point puo' essere usato per inviare un messaggio su topic
      * */
     @GetMapping(value = "/publish")
-    public void sendMessageToKafkaTopic(@RequestParam("message") String message) {
-    	producer.sendMessage(message);
+    public void sendMessageToKafkaTopic(@RequestParam("message") String message,@RequestParam String topic) {
+    	producer.sendMessage(message, topic);
     }
 }

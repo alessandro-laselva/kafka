@@ -9,15 +9,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class Producer {
 	
-	@Value("${topic}")
-	String topic;
+	
 
     
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
-    public void sendMessage(String message) {
+    public void sendMessage(String message, String topic) {
       
         this.kafkaTemplate.send(topic, message);
     }
