@@ -131,8 +131,12 @@ public class KafkaApplication {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.findAndRegisterModules();
 		try {
-			return objectMapper.writeValueAsString(msw);
-		} catch (JsonProcessingException e) {
+			//return objectMapper.writeValueAsString(msw);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			System.out.println( LocalDateTime.now().format(formatter)+ms.toString()+" %"+ms1.toString()+" mA/h"+ms2.toString()+" V"+ms3.toString()+" °C");
+			
+		return "\n"+LocalDateTime.now().format(formatter)+ms.toString()+" %"+ms1.toString()+" mA/h"+ms2.toString()+" V"+ms3.toString()+" °C";
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -188,6 +192,13 @@ public class KafkaApplication {
 		public void setValue(double value) {
 			this.value = value;
 		}
+
+		@Override
+		public String toString() {
+			return "\n"+typology.toUpperCase() +"  " + value ;
+		}
+		
+		
 
 	}
 
