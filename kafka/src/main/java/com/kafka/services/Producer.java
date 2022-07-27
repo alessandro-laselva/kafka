@@ -13,6 +13,7 @@ public class Producer {
 
 	public void sendMessage(String message, String topic) {
 		System.out.println("PRODUCER " + topic);
+		System.out.println(message);
 		this.kafkaTemplate.send(topic, message);
 	}
 }

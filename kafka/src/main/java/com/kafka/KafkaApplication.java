@@ -77,7 +77,7 @@ public class KafkaApplication {
 		Runnable task = () -> producer.sendMessage(createMessageLatLon(), topic1);
 		Runnable task2 = () -> producer.sendMessage(createMessageMeasure(), topic2);
 		executor.scheduleAtFixedRate(task, 0, schedulePeriod, TimeUnit.MILLISECONDS);
-		executor.scheduleAtFixedRate(task2, 0, schedulePeriod, TimeUnit.MILLISECONDS);
+		executor.scheduleAtFixedRate(task2, 0, schedulePeriod+1000, TimeUnit.MILLISECONDS);
 	}
 
 	private String createMessageLatLon() {
@@ -98,7 +98,7 @@ public class KafkaApplication {
 		latitude = Math.toDegrees(latitudeResult);
 		longitude = Math.toDegrees(longitudeResult);
 		String returnValue = LocalDateTime.now() + "\nlatitude: " + latitude + "\nlongitude: " + longitude + "\n";
-		System.out.println(returnValue);
+		//System.out.println(returnValue);
 		return returnValue;
 	}
 
@@ -133,9 +133,9 @@ public class KafkaApplication {
 		try {
 			//return objectMapper.writeValueAsString(msw);
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-			System.out.println( LocalDateTime.now().format(formatter)+ms.toString()+" %"+ms1.toString()+" mA/h"+ms2.toString()+" V"+ms3.toString()+" °C");
+			//System.out.println( "\n"+LocalDateTime.now().format(formatter)+ms.toString()+" %"+ms1.toString()+" mA/h"+ms2.toString()+" V"+ms3.toString()+" °C");
 			
-		return "\n"+LocalDateTime.now().format(formatter)+ms.toString()+" %"+ms1.toString()+" mA/h"+ms2.toString()+" V"+ms3.toString()+" °C";
+		return LocalDateTime.now().format(formatter)+ms.toString()+" %"+ms1.toString()+" mA/h"+ms2.toString()+" V"+ms3.toString()+" °C+\n";
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
